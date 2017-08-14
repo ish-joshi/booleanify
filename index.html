@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Booleanify</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script src="js/asuggest.js"></script>
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!--http://imankulov.github.io/asuggest/-->
+
+    <style>
+        #user_input{
+            resize: vertical;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            var suggests = ["and", "or", "not", "xor"];
+            $("#user_input").asuggest(suggests,
+                    {
+                        'endingSymbols': ' ',
+                        'stopSuggestionKeys': [$.asuggestKeys.TAB, $.asuggestKeys.RETURN],
+                        'minChunkSize': 1
+                    }
+            );
+        });
+
+        function generate(){
+            var content = $("#user_input").val();
+
+            //Split each line
+            var line = content.split("\n");
+
+            //Final html stored here
+            var output = "";
+
+            //Loop over each line
+            for(var i = 0; i < line.length; i++){
+                var element = line[i];
+
+                //Split each line by a space to get components
+                var data = element.split(" ");
+
+                for (var j = 0; j < data.length; j++){
+                    var component = data[j];
+
+                    if(component=='and'){
+                        output += "&and;";
+                    } else if(component=='or'){
+                        output += "&or;";
+                    } else if(component=='xor'){
+                        output += "&xor;";
+                    } else if(component == 'not'){
+                        output += "&not;";
+                    } else {
+                        output += component;
+                    }
+
+                    //Space
+                    output += " ";
+                }
+
+                //append a new line
+                output += "\n";
+
+            }
+
+            console.log(output);
+            document.getElementById("user_output").innerHTML = output;
+
+        }
+
+    </script>
+</head>
+<body>
+
+
+
+<div class="row" style="width: 99%">
+
+    <div class="col-md-12 col-sm-12">
+
+        <h1 style="margin-left: 5%;">Booleanify</h1>
+        <h4 style="margin-left: 5%; color: blue">Simplify typing boolean expressions.</h4>
+        <h5 style="margin-left: 5%; color: deeppink">Made by
+            <a target="_blank" style="color: deeppink" href="http://ishanjoshi.me">
+                <strong>Ishan Joshi</strong>
+            </a>
+        </h5>
+        <br>
+
+        <h4 style="margin-left: 5%">Some examples:</h4>
+        <ul style="margin-left: 5%">
+            <li>
+                <p>a and b &rightarrow; a &and; b</p>
+            </li>
+            <li>
+                <p>a or b and c &rightarrow; a &or; b &and; c</p>
+            </li>
+            <li>
+                <p>not a or b &rightarrow; &not; a &or; b</p>
+            </li>
+            <li>
+                <p>(<mark> </mark>not a or b<mark> </mark>) and c &rightarrow; ( &not; a &or; b ) &and; c
+                    <span style="color: #cd560e">  (Space is required after bracket open and close)</span>
+                </p>
+            </li>
+        </ul>
+
+        <br><br>
+        <h4 style="margin-left: 5%">Instructions</h4>
+        <ol style="margin-left: 5%">
+            <li>
+                <p>Type boolean expression in normal english in input section.</p>
+            </li>
+            <li>
+                <p>Press the generate button to see the output.</p>
+            </li>
+        </ol>
+    </div>
+
+    <div class="col-md-6 col-sm-12">
+        <h4 style="text-align: center">Input</h4>
+        <textarea placeholder="Try typing 'a and b or c'" id="user_input" rows="20" style="width: 89%; margin-left: 5%;"></textarea>
+    </div>
+
+    <div class="col-md-5 col-sm-12">
+        <h4 style="text-align: center">Output</h4>
+        <p style="color: grey; text-align: center; font-size: 2em;" id="user_output"> Output will be shown here</p>
+    </div>
+
+    <div class="col-md-12 col-sm-12">
+        <br><br>
+        <button style="width: 50%; margin-left: 25%; padding: 0.5%;" onclick="generate()">Generate</button>
+        <br><br>
+    </div>
+
+
+</div>
+
+
+
+</body>
+</html>
