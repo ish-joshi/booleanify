@@ -56,6 +56,9 @@
         });
 
         function generate(){
+            //Send google analytics event. 
+            ga('send', 'event', 'Generate', 'Convert', 'Initial_Campaign');
+            
             var content = $("#user_input").val();
 
             //Split each line
