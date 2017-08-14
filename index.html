@@ -73,6 +73,7 @@
 
                 for (var j = 0; j < data.length; j++){
                     var component = data[j];
+                    component = component.toLowerCase();
 
                     if(component=='and'){
                         output += "&and;";
@@ -83,7 +84,9 @@
                     } else if(component == 'not'){
                         output += "&not;";
                     } else {
+                        component = component.toUpperCase();
                         output += component;
+                        
                     }
 
                     //Space
