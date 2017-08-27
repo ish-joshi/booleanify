@@ -10,3 +10,5 @@ not a or b → ¬ a ∨ b <br />
 ## Rationale of development
 Last semester I was frustrated at typing boolean expressions for an assignment. It was infuriating to type it in word. I had to go with non-conventional symbols such as ' instead of ¬ which looked poor. Hence, I decided to make this to help students and any individual to easily convert English to Boolean expression.
 
+## Demo
+<img src="http://ishanjoshi.me/booleanify/booleanify_demo.png"/>
