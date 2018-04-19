@@ -86,6 +86,8 @@
                         output += "&not;";
                     } else if(component == '='){
                         output += "&equiv;";
+                    } else if(component == 'implies' || component == '->'){
+                        output += "&rarr;";
                     } else {
                         component = component.toUpperCase();
                         output += component;
